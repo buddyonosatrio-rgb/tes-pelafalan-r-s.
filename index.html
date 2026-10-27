@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c62828">
+  <title>LEOCE — Tantangan Pelafalan R & S</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="LEOCE Beranda"><span class="lion">🦁</span><span><b>LEOCE</b><small>Lion Pronunciation Challenge</small></span></a>
+    <button id="navToggle" class="menu-btn" aria-label="Buka menu">☰</button>
+    <nav id="nav">
+      <button class="nav-btn active" data-page="home">Beranda</button>
+      <button class="nav-btn" data-page="history">Riwayat Tes</button>
+      <button class="nav-btn" data-page="analysis">Analisis</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="page-home" class="page active">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">🎮 BELAJAR SAMBIL BERMAIN</span>
+          <h1>Berani tantang<br><span>R dan S?</span></h1>
+          <p>Yuk, baca kata dan kalimat bersama Leo! Rekam suaramu, simpan hasilnya, dan lihat perkembangan dari waktu ke waktu.</p>
+          <button id="startBtn" class="btn btn-yellow">Mulai Tantangan <span>→</span></button>
+          <p class="privacy-note">🔒 Rekaman tersimpan di perangkat ini. Ekspor cadangan secara berkala.</p>
+        </div>
+        <div class="mascot-card"><div class="sun"></div><div class="big-lion" role="img" aria-label="Maskot singa Leo">🦁</div><div class="speech">Kamu pasti bisa! ⭐</div></div>
+      </section>
+
+      <section class="quick-stats">
+        <article class="stat"><span>📝</span><div><b id="statTests">0</b><small>Sesi tes tersimpan</small></div></article>
+        <article class="stat"><span>🎙️</span><div><b id="statRecordings">0</b><small>Rekaman tersimpan</small></div></article>
+        <article class="stat"><span>📈</span><div><b id="statStudents">0</b><small>ID siswa tercatat</small></div></article>
+      </section>
+
+      <section class="panel intro-panel">
+        <div><span class="eyebrow red">MISI LEOCE</span><h2>Latihan sedikit demi sedikit</h2><p>Pilih bunyi yang ingin diuji. Penguji dapat menyimpan beberapa sesi untuk membandingkan perubahan pelafalan.</p></div>
+        <div class="mission-icons"><div><span>🦁</span><b>Dengarkan</b></div><div><span>🎤</span><b>Rekam</b></div><div><span>⭐</span><b>Tinjau</b></div></div>
+      </section>
+    </section>
+
+    <section id="page-test" class="page">
+      <div class="section-heading"><button class="back-btn" data-page="home">← Beranda</button><span class="eyebrow red">MISI BARU</span><h1>Mulai Tantangan</h1><p>Isi identitas seperlunya, lalu rekam siswa membaca teks yang ditampilkan.</p></div>
+      <form id="studentForm" class="panel student-form">
+        <label>ID / kode siswa <input id="studentId" required maxlength="40" placeholder="Contoh: S-001"></label>
+        <label>Nama atau nama samaran <input id="studentName" maxlength="80" placeholder="Contoh: Siswa A"></label>
+        <label>Kelas <input id="studentClass" maxlength="30" placeholder="Contoh: VIII-B"></label>
+        <label>Fokus tes
+          <select id="focus"><option value="both">Huruf R dan S</option><option value="r">Huruf R saja</option><option value="s">Huruf S saja</option></select>
+        </label>
+        <label>Level
+          <select id="level"><option value="syllables">Level 1 — Suku kata</option><option value="words" selected>Level 2 — Kata</option><option value="sentences">Level 3 — Kalimat</option><option value="mixed">Level 4 — Campuran</option></select>
+        </label>
+        <label>Catatan penguji <textarea id="notes" rows="2" placeholder="Opsional"></textarea></label>
+        <p class="form-note">Gunakan kode siswa jika ingin menjaga privasi. Pastikan izin orang tua/wali dan persetujuan yang diperlukan sudah diperoleh sebelum merekam anak.</p>
+        <button class="btn btn-red" type="submit">Siapkan Tantangan →</button>
+      </form>
+    </section>
+
+    <section id="page-game" class="page">
+      <div class="game-top"><button class="back-btn" data-page="test">← Data siswa</button><span id="stepLabel" class="pill">Tantangan 1</span></div>
+      <div class="game-card">
+        <div class="progress"><div id="progressBar"></div></div>
+        <div class="game-emoji">📖</div>
+        <span id="targetLabel" class="eyebrow red">BACA DENGAN SANTAI</span>
+        <h1 id="promptText">roda</h1>
+        <p id="promptHelp">Bacalah teks ini dengan suara yang jelas.</p>
+        <div class="record-status" id="recordStatus">Tekan tombol rekam jika sudah siap.</div>
+        <div class="record-controls">
+          <button id="recordBtn" class="btn btn-red">🎙️ Mulai Rekam</button>
+          <button id="stopBtn" class="btn btn-dark" disabled>■ Selesai</button>
+        </div>
+        <audio id="audioPlayer" controls hidden></audio>
+        <div class="record-actions"><button id="redoBtn" class="text-btn" disabled>↻ Rekam ulang</button><button id="nextBtn" class="btn btn-yellow" disabled>Simpan & Lanjut →</button></div>
+        <p class="tiny">Rekaman disimpan pada perangkat/browser ini. Jangan hapus data situs sebelum mengekspor hasil.</p>
+      </div>
+    </section>
+
+    <section id="page-results" class="page">
+      <div class="section-heading"><span class="eyebrow red">MISI SELESAI</span><h1>Kerja bagus! 🎉</h1><p>Berikut ringkasan sesi. Skor otomatis hanya indikasi awal dan perlu ditinjau penguji.</p></div>
+      <div id="resultSummary" class="results-grid"></div>
+      <div class="panel"><h2>Rekaman sesi ini</h2><div id="resultRecordings" class="record-list"></div></div>
+      <div class="result-actions"><button class="btn btn-red" id="newTestBtn">Tes siswa lagi</button><button class="btn btn-yellow" data-page="history">Buka riwayat</button></div>
+    </section>
+
+    <section id="page-history" class="page">
+      <div class="section-heading"><span class="eyebrow red">ARSIP LEOCE</span><h1>Riwayat Tes</h1><p>Putar rekaman sebelumnya atau ekspor data untuk dianalisis.</p></div>
+      <div class="toolbar"><input id="historySearch" placeholder="Cari ID atau nama siswa…"><button id="exportCsvBtn" class="btn btn-yellow">Ekspor CSV</button><button id="exportJsonBtn" class="btn btn-outline">Cadangkan JSON + audio</button></div>
+      <div id="historyList" class="history-list"></div>
+      <p class="form-note">Penyimpanan bawaan memakai IndexedDB di browser/perangkat ini. Data tidak otomatis tersinkron ke perangkat lain. Simpan cadangan dan gunakan perangkat yang aman.</p>
+    </section>
+
+    <section id="page-analysis" class="page">
+      <div class="section-heading"><span class="eyebrow red">DASHBOARD PENGUJI</span><h1>Analisis Perkembangan</h1><p>Bandingkan skor dari sesi ke sesi. Skor 1 berarti lebih jelas; skor 5 berarti lebih banyak kesulitan yang teramati.</p></div>
+      <div class="panel analysis-filter"><label>Pilih ID siswa <select id="analysisStudent"><option value="">Semua siswa</option></select></label><button id="refreshAnalysis" class="btn btn-red">Tampilkan</button></div>
+      <div id="analysisSummary" class="quick-stats"></div>
+      <div class="panel"><h2>Perkembangan skor</h2><div id="chartArea" class="chart-area"><p>Belum ada data untuk ditampilkan.</p></div></div>
+      <div class="panel"><h2>Catatan penting</h2><p>Gunakan hasil ini untuk pemantauan, bukan diagnosis. Penilaian bunyi R/S yang akurat perlu mendengarkan audio dan/atau pemeriksaan ahli. Website versi awal ini tidak mengklaim dapat mendiagnosis cadel secara otomatis.</p></div>
+    </section>
+
+    <section id="page-guide" class="page">
+      <div class="section-heading"><span class="eyebrow red">PANDUAN</span><h1>Cara menggunakan LEOCE</h1></div>
+      <div class="panel"><ol><li>Masukkan kode siswa dan pilih fokus serta level.</li><li>Izinkan akses mikrofon saat diminta browser.</li><li>Siswa membaca teks yang tampil; tekan Selesai setelah membaca.</li><li>Dengarkan rekaman dan simpan untuk lanjut ke teks berikutnya.</li><li>Di halaman hasil, penguji perlu meninjau bunyi R/S dan menentukan skor akhir.</li><li>Buka Riwayat Tes untuk memutar rekaman dan mengekspor data.</li></ol><p class="form-note">Bintang 1 = pelafalan target sangat jelas. Bintang 5 = pelafalan target sangat sering tidak jelas pada sampel yang diuji. Skor otomatis tidak dibuat pada versi ini agar tidak memberikan penilaian palsu tanpa analisis fonetik yang valid.</p></div>
+    </section>
+  </main>
+
+  <footer><span>🦁 LEOCE</span><span>Latihan dengan gembira, tinjau dengan teliti.</span><button class="text-btn" data-page="guide">Panduan</button></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
